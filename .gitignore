@@ -1,0 +1,4 @@
+# Ignore NPM packages #
+/node_modules
+# Ignore VSCode settings #
+.vscode
