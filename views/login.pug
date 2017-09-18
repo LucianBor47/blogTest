@@ -1,0 +1,22 @@
+doctype html
+html
+    head
+        title= title
+        link(href='/css/style.css', rel='stylesheet')
+        link(href='/css/forms.css', rel='stylesheet')
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        meta(charset="utf-8")
+    body
+        div.cont
+            h2= 'Please log in. :)'
+            div.register-form
+                form(method='POST' action='login')
+                    ul.forms
+                        li.form-lines
+                            label(for='email') Email:
+                            input#email(type='email', placeholder='email@email.com' name='email')
+                        li.form-lines
+                            label(for='password') Password:
+                            input#password(type='password' name='password')
+                    button.button(type='submit') Log in
+

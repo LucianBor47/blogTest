@@ -1,0 +1,28 @@
+doctype html
+html
+    head
+        title= title
+        link(href='/css/style.css', rel='stylesheet')
+        link(href='/css/forms.css', rel='stylesheet')
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        meta(charset="utf-8")
+    body
+        div.cont
+            h2= 'Please fill out the registration form. :)'
+            div.register-form
+                form(method='POST' action='register')
+                    ul.forms
+                        li.form-lines
+                            label(for='name') Name:
+                            input#name(type='text', placeholder='Name...' name='name')
+                        li.form-lines
+                            label(for='email') Email:
+                            input#email(type='email', placeholder='email@email.com' name='email')
+                        li.form-lines
+                            label(for='password') Password:
+                            input#password(type='password' name='password')
+                        li.form-lines
+                            label(for='passcheck') Password Check:
+                            input#passcheck(type='password' name='passcheck')
+                    button.button(type='submit') Register
+

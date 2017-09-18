@@ -25,13 +25,13 @@ module.exports = (app) => {
     app.get('/api/user/:id', (req, res) => {
         if (parseInt(req.params.id)) {
             const query = {
-                text: 'SELECT name, email, password, joined_up FROM users WHERE id = $1',
+                text: 'SELECT name, email, joined_up FROM users WHERE id = $1',
                 values: [req.params.id]
             };
             db.query(query, (err, data) => {
                 if (err) throw err;
-                console.log(bcrypt.compareSync("testpass", data.rows[0]['password']));
                 res.send(data.rows[0]);
+                console.log(`Query made for: ${data.rows[0].name}`);
             });
         } else {
             res.send('Error: id needs to be an integer...');
@@ -73,5 +73,36 @@ module.exports = (app) => {
             res.send('User deleted! ' + req.body.name);
         });
     });
-}
 
+    app.post('/register', (req, res) => {
+        const saltRounds = 10;
+        const newPass = bcrypt.hashSync(req.body.password, saltRounds);
+        const query = {
+            text: 'INSERT INTO users(name, email, password) values($1,$2,$3)',
+            values: [req.body.name, req.body.email, newPass]
+        }
+        if (req.body.name && req.body.email && req.body.password) {
+            db.query(query, (err, data) => {
+                if(err) {throw err};
+                console.log('User Created!');
+                res.redirect('/db');
+            });
+        } else {
+            console.log('Fail...');
+            res.redirect('/register');
+        } 
+    });
+
+    app.post('/login', (req, res) => {
+        console.log(req.body);
+        res.redirect('/login');
+        if (req.body.email && req.body.password) {
+            const query = {
+                text: 'SELECT name, email, joined_up FROM users WHERE id = $1',
+                values: [req.params.id]
+            };
+        } else {
+            res.redirect('/login');
+        }
+    });
+}

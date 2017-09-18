@@ -12,4 +12,6 @@ html
             h4= "These are the user names in the database: "
             each item in data
                 
-                li(class='items')= item.id + ". " + item.name + " id: " + item.id
+                li(class='items')= "ID: " + item.id + ", Name: " + item.name + ", Email: " + item.email
+        
+        a(href='/register'): h4= 'Register Here'
